@@ -1,0 +1,7 @@
+[deps]
+InvertedIndices = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
+Latexify = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+SymPy = "24249f21-da20-56a4-8eb1-6a02cf4ae2e6"
+Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
