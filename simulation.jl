@@ -33,6 +33,7 @@ function simulation(adjMatrix, Sstart, Zstart; p = 0.5, q = 0.5, stayPut = false
     if animate 
         anim = Animation()
         graph = Graph(adjMatrix)
+        loc_x, loc_y = spring_layout(Graph(adjMatrix), MAXITER = 200, C = 1.) # not needed if using circular layout
     end 
     while Spos != Zpos
         if animate
@@ -52,7 +53,7 @@ function simulation(adjMatrix, Sstart, Zstart; p = 0.5, q = 0.5, stayPut = false
                 nodeLabel).(nodeLabel)
             nodeColor = [colorant"grey", colorant"green", colorant"red"]
             nodeFillC = nodeColor[pos_helper]
-            output = gplot(graph, nodelabel = nodeLabel, nodefillc = nodeFillC, layout = circular_layout)
+            output = gplot(graph, loc_x, loc_y, nodelabel = nodeLabel, nodefillc = nodeFillC)
             output = compose(output,
                 (context(), Compose.text(-1.15, -1.05, "Turn: $n")),
                 (context(), Compose.text(-1.15, -0.95, "Current Distance: $currentDist")),
@@ -99,7 +100,7 @@ function simulation(adjMatrix, Sstart, Zstart; p = 0.5, q = 0.5, stayPut = false
                 nodeLabel).(nodeLabel)
         nodeColor = [colorant"grey", colorant"red"]
         nodeFillC = nodeColor[pos_helper]
-        output = gplot(graph, nodelabel = nodeLabel, nodefillc = nodeFillC, layout = circular_layout)
+        output = gplot(graph, loc_x, loc_y, nodelabel = nodeLabel, nodefillc = nodeFillC)
         output = compose(output,
             (context(), Compose.text(-1.15, -1.05, "Game ended on turn: $n")),
             (context(), Compose.text(-1.15, -0.95, "Current Distance: 0")),
