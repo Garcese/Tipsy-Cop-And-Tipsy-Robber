@@ -9,7 +9,7 @@ Below is a simulation of the game using the Plots.jl and GraphPlots.jl framework
     <img src="https://github.com/Garcese/cops_and_robbers/blob/main/simulation.gif" alt="animated" />
 </p>
 
-The $(I-Q)$ that we are looking to invert is a family of matrices of the following form (here, the maximum distance on the graph is either 10 or 11, and hence the matrix is 5 by 5).
+The $(I-Q)$ that we are looking to invert is a family of matrices of the following form below (here, the maximum distance on the graph is either 10 or 11, and hence the matrix is 5 by 5). The ability to model the game with the matrix structure below depends on whether the chosen graph is distance transitive.
 
 ```math
 \begin{align*}
