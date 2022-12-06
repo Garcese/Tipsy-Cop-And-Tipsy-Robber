@@ -25,6 +25,6 @@ The $(I-Q)$ that we are looking to invert is a family of matrices of the followi
 \end{align*}
 ```
 
-An earlier state of this project was presented at the Society for Industrial and Applied Mathematics 2022 conference (SIAM22) in Pittsburgh by Giancarlo Arcese. A copy of the presentation as well as a video recording can be found in the siam22 folder.
-
 Active work on the project is headed by Giancarlo Arcese (me) and professor Gabriel Sosa Castillo of Colgate Univesrity. Previous work by Pamela Harris, Alicia Pietro-Langarica, and Charles Smith.
+
+An earlier state of this project was presented at the Society for Industrial and Applied Mathematics 2022 conference (SIAM22) in Pittsburgh by Giancarlo Arcese. A copy of the presentation as well as a video recording can be found in the siam22 folder.
