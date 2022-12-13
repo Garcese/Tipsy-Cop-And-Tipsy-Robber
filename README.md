@@ -3,7 +3,7 @@
 
 The repository currently contains functions to simulate the game, generate transition matrices to model the game, and various scripts to help invert the $(I-Q)$ matrix to obtain the fundamental matrix.
 
-Below is a simulation of the game using the Plots.jl and GraphPlots.jl framework. Instead of a cop and robber, we use a zombie and survivor. The game is being played on the hypercube graph where $p = q = 0.5$. The green "S" node represents the survivor, and the red "Z" nod
+Below is a simulation of the game using the Plots.jl and GraphPlots.jl framework. Instead of a cop and robber, we use a zombie and survivor. The game is being played on the hypercube graph where $p = q = 0.5$. The green "S" node represents the survivor, and the red "Z" node.
 <br />
 <p align="center">
     <img src="https://github.com/Garcese/cops_and_robbers/blob/main/simulation.gif" alt="animated" />
