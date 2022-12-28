@@ -1,4 +1,4 @@
-# cops_and_robbers
+# Tipsy Cop and Tipsy Robber on Distance-Transitive Graphs
  Programming work dedicated to the Tipsy Cop and Tipsy Robber research project - a generalization of the regular Cops and Robbers game from graph theory where the respective agents move randomly with probability $(1-p)$ and $(1-q)$. 
 
 The repository currently contains functions to simulate the game, generate transition matrices to model the game, and various scripts to help invert the $(I-Q)$ matrix to obtain the fundamental matrix.
