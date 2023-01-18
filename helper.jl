@@ -24,6 +24,8 @@ function PyObject(ex::Num)
     ex |> x -> latexify(x, env = :raw) |> 
         String |> 
         x -> replace(x, r"(?<![\+,\-]) (?![\+,\-])" => "*") |> 
+        x -> replace(x, r"(}ˏ_)|{" => "") |> # this helps convert multidimensional symbolic arrays
+        # It's not perfect though. Like the PyObject won't see it as having two indices, just one
         sympy.parse_expr
 end
 

@@ -80,8 +80,8 @@ end
 function prod_pivots(length; shift = 0, symbolic = false)
     max_index = length + shift
     if symbolic
-        @variables S[1:max_index]
-        out = S[length]^(shift + 1) # THIS DOESN'T WORK
+        @variables S[1:max_index, 1:max_index]
+        out = S[length, shift + 1]
     else
         @variables C[1:max_index] c[1:max_index] f[1:max_index] F[1:max_index]
         terms = []
@@ -100,14 +100,14 @@ function prod_pivots(length; shift = 0, symbolic = false)
     out
 end
 
-function gen_det(n; symbolic = false)
-    @variables C[1:n] c[1:n] f[1:n] F[1:n]
+function gen_det(n; symbolic = false, Xs = false)
+    @variables C[1:n] c[1:n] f[1:n] F[1:n] X[1:n]
     dets = [prod_pivots(1, symbolic = symbolic)]
     i = 1
     while i < n
         to_add = []
         for (index, value) in enumerate(dets)
-            new = i == index ? value*(C[i+1] + c[i+1]) : value*prod_pivots(i+1 - index, shift = index, symbolic = symbolic)
+            new = i == index ? value*(Xs ? X[i+1] : C[i+1] + c[i+1]) : value*prod_pivots(i+1 - index, shift = index, symbolic = symbolic)
             append!(to_add, new)
         end
         append!(dets, sum(to_add) + prod_pivots(i+1, symbolic = symbolic))
