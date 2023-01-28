@@ -23,9 +23,9 @@ end
 function PyObject(ex::Num)
     ex |> x -> latexify(x, env = :raw) |> 
         String |> 
+        x -> replace(x, r"\s+(?=[^[\{]*\})" => "") |> # when an index is greater than one digits
         x -> replace(x, r"(?<![\+,\-]) (?![\+,\-])" => "*") |> 
-        x -> replace(x, r"(}ˏ_)|{" => "") |> # this helps convert multidimensional symbolic arrays
-        # It's not perfect though. Like the PyObject won't see it as having two indices, just one
+        x -> replace(x, r"}|{" => "") |> # this helps convert multidimensional symbolic arrays too!
         sympy.parse_expr
 end
 
@@ -33,7 +33,9 @@ end
 function PyObject(matrix::Matrix{Num})
     matrix .|> x -> latexify(x, env = :raw) |> 
         String |> 
+        x -> replace(x, r"\s+(?=[^[\{]*\})" => "") |> # when an index is greater than one digits
         x -> replace(x, r"(?<![\+,\-]) (?![\+,\-])" => "*") |> 
+        x -> replace(x, r"}|{" => "") |> # this helps convert multidimensional symbolic arrays too!
         sympy.parse_expr
 end
 
@@ -48,7 +50,7 @@ function order_indices(expr::Sym; reverse = false)
     if expr.is_Mul
         indexed = [arg for arg in expr.args if !(arg.is_Add || arg.is_Mul)] .|> 
             string |> 
-            x -> sort(x, by = y -> match(r"[1-9]+", y).match) .|> 
+            x -> sort(x, by = y -> parse(Int, match(r"[0-9]+", y).match)) .|> # adjusted to account multi-digit indices
             sympy.sympify .|> 
             sympy.UnevaluatedExpr
         muls = [arg for arg in expr.args if arg.is_Mul]
@@ -72,4 +74,15 @@ end
 # If somehow gets passed to just a number
 function order_indices(expr; reverse = false)
     expr
+end
+
+# create a big dictionary for substituting in the adjugate
+function big_dict(n)
+    dict = Dict([])
+    for i in reverse(2:n), j in reverse(1:n)
+        key = prod_pivots(i, shift = j - 1) |> PyObject
+        value = prod_pivots(i, shift = j - 1, symbolic = true) |> PyObject
+        push!(dict, key => value)
+    end
+    dict
 end
